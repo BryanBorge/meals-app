@@ -11,6 +11,12 @@ const MealDetailScreen = props => {
           props.navigation.popToTop();
         }}
       />
+      <Button
+        title='GO BACK'
+        onPress={() => {
+          props.navigation.goBack();
+        }}
+      />
     </View>
   );
 };
