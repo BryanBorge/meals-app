@@ -37,6 +37,7 @@ const CategoriesScreen = props => {
       numColumns={2}
       data={CATEGORIES}
       renderItem={renderGridItem}
+      numColumns={2}
     />
   );
 };
