@@ -5,19 +5,19 @@ import {
   Text,
   StyleSheet,
   Platform,
-  ToucheableNativeFeedback,
+  TouchableNativeFeedback,
 } from "react-native";
-import Colors from "../constants/Colors";
+
 const CategoryGridTile = props => {
-  let ToucheableComponent = TouchableOpacity;
+  let TouchableCmp = TouchableOpacity;
 
   if (Platform.OS === "android" && Platform.Version >= 21) {
-    ToucheableComponent = ToucheableNativeFeedback;
+    TouchableCmp = TouchableNativeFeedback;
   }
 
   return (
     <View style={styles.gridItem}>
-      <ToucheableComponent style={{ flex: 1 }} onPress={props.onSelect}>
+      <TouchableCmp style={{ flex: 1 }} onPress={props.onSelect}>
         <View
           style={{ ...styles.container, ...{ backgroundColor: props.color } }}
         >
@@ -25,7 +25,7 @@ const CategoryGridTile = props => {
             {props.title}
           </Text>
         </View>
-      </ToucheableComponent>
+      </TouchableCmp>
     </View>
   );
 };
@@ -62,4 +62,5 @@ const styles = StyleSheet.create({
     textAlign: "right",
   },
 });
+
 export default CategoryGridTile;
