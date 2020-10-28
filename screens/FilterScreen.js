@@ -1,9 +1,10 @@
 import React, { useState, useEffect, useCallback } from "react";
+import { useDispatch } from "react-redux";
 import { View, Text, StyleSheet, Switch, Platform } from "react-native";
 import { HeaderButtons, Item } from "react-navigation-header-buttons";
 import HeaderButton from "../components/HeaderButton";
 import Colors from "../constants/Colors";
-
+import { setFilters } from "../store/actions/meals";
 const FilterSwitch = props => {
   return (
     <View style={styles.filterContainer}>
@@ -31,6 +32,8 @@ const FilterScreen = props => {
     navigation.setParams({ save: saveFilters });
   }, [saveFilters]);
 
+  const dispatch = useDispatch();
+
   //cached and only changes when its dependencies change
   const saveFilters = useCallback(() => {
     const appliedFilters = {
@@ -39,8 +42,8 @@ const FilterScreen = props => {
       vegan: isVegan,
       vegetarian: isVegetarian,
     };
-    console.log(appliedFilters);
-  }, [isGlutenFree, isLactoseFree, isVegan, isVegetarian]);
+    dispatch(setFilters(appliedFilters));
+  }, [isGlutenFree, isLactoseFree, isVegan, isVegetarian, dispatch]);
 
   return (
     <View style={styles.screen}>
@@ -89,7 +92,6 @@ FilterScreen.navigationOptions = navData => {
           title='Save'
           iconName='ios-save'
           onPress={() => {
-            console.log("saving");
             navData.navigation.getParam("save");
           }}
         />
